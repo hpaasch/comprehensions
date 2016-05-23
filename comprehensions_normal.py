@@ -22,6 +22,13 @@ def svelte_comprehension_vowels():
 svelte_comprehension_vowels()
 
 # ------------------------------------------------------------
+# BONUS: Create open_and_extract function that will generate a list on whatever column I want.
+# water_temp, water_date, wave_height
+
+
+
+
+# ------------------------------------------------------------
 # Create a list of Water Temps for each day the data set below.
 
 def collect_water():
@@ -72,17 +79,35 @@ float_those_temperatures()
 def convert_temps():
     farenheit_water_temps =[]
 
-    for item in float_those_temperatures():
+    for item in float_those_temperatures(): # change to comprehension
         conversion_temp = int((item * 1.8) + 32)
         farenheit_water_temps.append(conversion_temp)
-    print(farenheit_water_temps)
+    # print(farenheit_water_temps)
     return farenheit_water_temps
 convert_temps()
 
-
+# --------------------------------------------------------------------
 # Create a dictionary with Date as the key and Wave Height as the value
+# Step One: create list of Wave Height
 
+def collect_waves():
+    waves = {}
+    import csv
+    with open("data_set.txt") as water_data:
+        read_water_data = csv.reader(water_data, delimiter=',')
+        next(read_water_data, None)  # skips the header
+        wave_list = []
 
+        for row in read_water_data:  # change to comprehension
+            wave_temp = row[1]
+            wave_list.append(wave_temp)
+    # print(wave_list)
+    return wave_list
+collect_waves()
+
+# Step Two: Marry collect_waves with collect_dates in a dictionary
+def wave_timeline():
+    
 
 # Create a dictionary with the average wave height for each day
 
