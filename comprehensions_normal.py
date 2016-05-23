@@ -90,8 +90,8 @@ convert_temps()
 # Create a dictionary with Date as the key and Wave Height as the value
 # Step One: create list of Wave Height
 
+
 def collect_waves():
-    waves = {}
     import csv
     with open("data_set.txt") as water_data:
         read_water_data = csv.reader(water_data, delimiter=',')
@@ -106,8 +106,25 @@ def collect_waves():
 collect_waves()
 
 # Step Two: Marry collect_waves with collect_dates in a dictionary
+
+
 def wave_timeline():
-    
+    date_list = collect_dates()
+    wave_list = collect_waves()
+
+    waves = dict(zip(date_list, wave_list))
+    # print(waves)
+    return waves
+wave_timeline()
 
 # Create a dictionary with the average wave height for each day
 
+
+def avg_wave_height():
+    wave_list = (collect_waves())
+    avg_wave = sum(wave for wave in wave_list if wave)/len(wave_list)
+    print(avg_wave)
+avg_wave_height()
+
+
+# Create a nested comprehension to get the average of the Homework 1 grades.
