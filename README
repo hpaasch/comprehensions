@@ -1,0 +1,9 @@
+All exercises are in one file.
+
+Print lines are commented out but easily restored for testing results.
+
+Average wave height is calculated as a monthly average, not an average for
+each day of the week. I realized my mistake, but have not yet figured out how
+to adjust.
+
+Should I be putting functions in a separate text file?
