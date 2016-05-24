@@ -25,36 +25,27 @@ svelte_comprehension_vowels()
 # BONUS: Create open_and_extract function that will generate a list on whatever column I want.
 # water_temp, water_date, wave_height
 
-
-
-
 # ------------------------------------------------------------
 # Create a list of Water Temps for each day the data set below.
+
 
 def collect_water():
     import csv
     with open("data_set.txt") as water_data:
         read_water_data = csv.reader(water_data, delimiter=',')
         next(read_water_data, None)
-        water_temps = []
-
-        for row in read_water_data: # change to comprehension
-            water_temp = row[-2]
-            water_temps.append(water_temp)
+        water_temps = [row[-2] for row in read_water_data]
         # print(water_temps)
         return water_temps
 collect_water()
+
 
 def collect_dates():
     import csv
     with open("data_set.txt") as water_data:
         read_water_data = csv.reader(water_data, delimiter=',')
-        next(read_water_data, None) # skips the header
-        dates = []
-
-        for row in read_water_data: # change to comprehension
-            date = row[-1]
-            dates.append(date)
+        next(read_water_data, None)  # skips the header
+        dates = [row[-1] for row in read_water_data]
         # print(dates)
         return dates
 collect_dates()
@@ -62,13 +53,10 @@ collect_dates()
 # ------------------------------------------------
 # Convert the Water Temps from a string to a float
 
+
 def float_those_temperatures():
-    floated_water_temps = []
-
-    for temperature in collect_water():  # change to comprehension
-            floated_temp = float(temperature)
-            floated_water_temps.append(floated_temp)
-
+    unfloated_water = collect_water()
+    floated_water_temps = [float(temperature) for temperature in unfloated_water]
     # print(floated_water_temps)
     return floated_water_temps
 float_those_temperatures()
@@ -77,11 +65,8 @@ float_those_temperatures()
 # Convert the Water Temps from Celsius to Fahrenheit rounded to an int
 
 def convert_temps():
-    farenheit_water_temps =[]
-
-    for item in float_those_temperatures(): # change to comprehension
-        conversion_temp = int((item * 1.8) + 32)
-        farenheit_water_temps.append(conversion_temp)
+    floated_temps = float_those_temperatures()
+    farenheit_water_temps =[int(item * 1.8 + 32) for item in floated_temps]
     # print(farenheit_water_temps)
     return farenheit_water_temps
 convert_temps()
@@ -96,11 +81,7 @@ def collect_waves():
     with open("data_set.txt") as water_data:
         read_water_data = csv.reader(water_data, delimiter=',')
         next(read_water_data, None)  # skips the header
-        wave_list = []
-
-        for row in read_water_data:  # change to comprehension
-            wave_temp = row[1]
-            wave_list.append(wave_temp)
+        wave_list = [row[1] for row in read_water_data]
     # print(wave_list)
     return wave_list
 collect_waves()
@@ -124,7 +105,7 @@ def avg_wave_height():
     wave_list = (collect_waves())
     avg_wave = sum(wave for wave in wave_list if wave)/len(wave_list)
     print(avg_wave)
-avg_wave_height()
+# avg_wave_height()
 
 
 # Create a nested comprehension to get the average of the Homework 1 grades.
