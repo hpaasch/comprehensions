@@ -96,19 +96,33 @@ wave_timeline()
 
 # Create a dictionary with the average wave height for each day
 
-# this gives an average wave height for the month.
-def avg_wave_height():
-    wave_list = (collect_waves())
-    floated_waves = [float(wave) for wave in wave_list]
-    total_waves = sum(floated_waves)
-    avg_wave = total_waves/len(wave_list)
-    # print(avg_wave)
-    return avg_wave
-avg_wave_height()
+import datetime
+from collections import defaultdict
+
+days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+timeline = wave_timeline()
+
+def get_dow(date_string):
+    return days[datetime.datetime.strptime(date_string, "%Y-%m-%d").weekday()]
+
+new_list = []
+for day, wave in timeline.items():
+    temp_wave = (get_dow(day), float(wave))  # creates tuples
+    new_list.append(temp_wave)
+# print(new_list)
+
+waves_by_day = defaultdict(list)
+for day, wave in new_list:
+    waves_by_day[day].append(wave)
+# print(waves_by_day)
+
+avg_waves_by_day = {}
+for day, wave in waves_by_day.items():
+    avg_waves_by_day[day] = sum(wave) / len(wave)
+print(avg_waves_by_day)
 
 
 # Create a nested comprehension to get the average of the Homework 1 grades.
-
 
 def homework_average():
     grade_dict = {
