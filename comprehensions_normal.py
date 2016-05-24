@@ -69,9 +69,8 @@ convert_temps()
 
 # --------------------------------------------------------------------
 # Create a dictionary with Date as the key and Wave Height as the value
-# Step One: create list of Wave Height
 
-
+# Step One
 def collect_waves():
     import csv
     with open("data_set.txt") as water_data:
@@ -83,8 +82,6 @@ def collect_waves():
 collect_waves()
 
 # Step Two: Marry collect_waves with collect_dates in a dictionary
-
-
 def wave_timeline():
     date_list = collect_dates()
     wave_list = collect_waves()
@@ -94,6 +91,7 @@ def wave_timeline():
     return waves
 wave_timeline()
 
+# --------------------------------------------------------------------
 # Create a dictionary with the average wave height for each day
 
 import datetime
@@ -105,23 +103,22 @@ timeline = wave_timeline()
 def get_dow(date_string):
     return days[datetime.datetime.strptime(date_string, "%Y-%m-%d").weekday()]
 
-new_list = []
-for day, wave in timeline.items():
-    temp_wave = (get_dow(day), float(wave))  # creates tuples
-    new_list.append(temp_wave)
-# print(new_list)
+def wave_summary():
+    new_list = [(get_dow(day), float(wave)) for day, wave in timeline.items()]
+    # print(new_list)
 
-waves_by_day = defaultdict(list)
-for day, wave in new_list:
-    waves_by_day[day].append(wave)
-# print(waves_by_day)
+    waves_by_day = defaultdict(list)
+    for day, wave in new_list:
+        waves_by_day[day].append(wave)
+    # print(waves_by_day)
 
-avg_waves_by_day = {}
-for day, wave in waves_by_day.items():
-    avg_waves_by_day[day] = sum(wave) / len(wave)
-print(avg_waves_by_day)
+    avg_waves_by_day = {}
+    for day, wave in waves_by_day.items():
+        avg_waves_by_day[day] = sum(wave) / len(wave)
+    # print(avg_waves_by_day)
+wave_summary()
 
-
+# --------------------------------------------------------------------
 # Create a nested comprehension to get the average of the Homework 1 grades.
 
 def homework_average():
